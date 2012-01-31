@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>the last job on earth</title>
+    <style type="text/css">
+        h1 small {
+            color: #999;
+        }
+        #players {
+            float: left;
+        }
+        #form {
+            margin: 0 auto;
+            width: 400px;
+        }
+        #form input {
+            width: 100px;
+        }
+        #game {
+            overflow: hidden;
+            width: 100%;
+        }
+        #game #map {
+            background: #888;
+            float: right;
+            height: 300px;
+            margin: 10px;
+            width: 300px;
+        }
+        #game #output {
+            background: #000;
+            color: #ccc;
+            height: 400px;
+            width: 600px;
+            margin: 0 auto;
+        }
+        #game #command {
+            margin: 10px auto 0;
+            text-align: center;
+            width: 600px;
+        }
+        #game #command input[type="text"] {
+            width: 300px;
+        }
+    </style>
+</head>
+<body>
+    <h1><small>do you have what it takes to land</small> the last job on earth<small>?</small></h1>
+    <div id="players">
+        <h3>job seekers</h3>
+        <ul id="players-list">
+        </ul>
+    </div>
+    <div id="form">
+        <input placeholder="your name" type="text" name="name" />
+        <input placeholder="your specialty" type="text" name="specialty" />
+        <a href="#">start seeking!</a>
+    </div>
+    <div id="game">
+        <div id="map">map</div>
+        <div id="output">output</div>
+        <div id="command">
+            <input placeholder="what's next?" type="text" name="command" />
+            <input type="submit" name="go" value="do it!" />
+        </div>
+    </div>
+   <script src="http://cdnjs.cloudflare.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+   <script src="http://cdnjs.cloudflare.com/ajax/libs/require.js/1.0.1/require.min.js"></script>
+   <script src="http://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.2.2/underscore-min.js"></script>
+   <script src="http://cdnjs.cloudflare.com/ajax/libs/backbone.js/0.5.3/backbone-min.js"></script>
+
+    <script>
+(function ($) {
+
+Employer = Backbone.Model.extend({
+    //x
+    //y
+    //has_job
+    //name
+});
+
+Tile = Backbone.Model.extend({
+    //x
+    //y
+    //players: []
+    //players_count
+
+});
+
+Player = Backbone.Model.extend({
+    defaults: {
+        specialty: 'unspecialized',
+        name: 'anonymous',
+        x: 0,
+        y: 0
+    },
+    initialize: function(){
+        console.log('new player joined at position [' + this.get('x') + ',' + this.get('y') +']!');
+        this.bind("change:guild", function() {
+            var guild = this.get("guild"); 
+            //console.log('Player guild set to ' + guild);
+        });
+
+        this.bind("change:name", function() {
+            var name = this.get("name"); 
+            //console.log('Player name set to ' + name);
+        });
+    },
+    setGuild: function(newGuild){
+        this.set({ guild: newGuild });
+    },
+    setName: function(newName){
+        this.set({ name: newName });
+    }
+});
+
+
+DungeonView = Backbone.View.extend({
+    el: $("body"),
+    initialize: function () {
+    },
+    events: {
+    }
+});
+
+var dungeonView = new DungeonView;
+
+})(jQuery);
+
+
+
+
+
+
+    </script>
+</body>
+</html>
+
+
+
